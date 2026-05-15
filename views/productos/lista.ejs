@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario - Lista</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .table-container { overflow-x: auto; margin-top: 20px; }
+        th { color: #4a5568; font-weight: bold; }
+        .acciones-col { display: flex; flex-direction: column; gap: 5px; align-items: center; }
+        .mini-btn { padding: 2px 8px; font-size: 12px; cursor: pointer; border: none; border-radius: 4px; color: white; width: 100%; box-sizing: border-box; text-align: center; text-decoration: none;}
+        .mini-btn.blue { background-color: #31a2d1; }
+        .mini-btn.red { background-color: #f46e65; }
+        .mini-btn.gray { background-color: #a0aec0; }
+        .btn-top { padding: 12px 20px; border-radius: 4px; color: white; text-decoration: none; font-weight: bold; border: none; cursor: pointer; }
+        .btn-top.blue { background-color: #31a2d1; }
+        .btn-top.orange { background-color: #f6ad55; color: white; opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1200px;">
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+            <a href="/" class="btn-top blue">Volver al Inicio</a>
+            <a href="/productos/nuevo" class="btn-top orange">Registrar Nuevo Objeto</a>
+        </div>
+        
+        <% if (typeof isAlerts !== 'undefined' && isAlerts) { %>
+            <h2 style="color: #e53e3e;">⚠️ Alertas de Bajo Stock</h2>
+        <% } %>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Ubicación</th>
+                        <th>Cant.<br>Inicial</th>
+                        <th>Stock<br>Actual</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% productos.forEach((producto, index) => { %>
+                        <tr>
+                            <td style="color: #718096;"><%= index + 1 %></td>
+                            <td><strong style="color: #4a5568;"><%= producto.nombre %></strong></td>
+                            <td style="color: #718096;"><%= producto.descripcion || 'Sin descripción' %></td>
+                            <td style="color: #718096;">
+                                <%= producto.nombre_bodega %>,<br>
+                                <%= producto.nombre_sector %>,<br>
+                                <%= producto.nombre_estante %>
+                            </td>
+                            <td style="color: #718096; text-align: center;"><%= producto.cantidad_inicial %></td>
+                            <td style="font-weight: bold; text-align: center;">
+                                <%= producto.cantidad_actual %> 
+                                <span class="status-circle bg-<%= producto.color_stock %>"></span>
+                            </td>
+                            <td style="color: #718096;">$<%= producto.precio %></td>
+                            <td>
+                                <div class="acciones-col" style="display: flex; flex-direction: column; gap: 5px; align-items: center; width: 70px;">
+                                    <!-- Fila 1: [+] y [-] -->
+                                    <div style="display: flex; gap: 5px;">
+                                        <form action="/productos/<%= producto.id %>/sumar" method="POST" style="margin:0;">
+                                            <button type="submit" class="action-btn btn-blue" title="Sumar stock">+</button>
+                                        </form>
+                                        <form action="/productos/<%= producto.id %>/restar" method="POST" style="margin:0;">
+                                            <button type="submit" class="action-btn btn-red" title="Restar stock">-</button>
+                                        </form>
+                                    </div>
+                                    <!-- Fila 2: Editar y Eliminar -->
+                                    <div style="display: flex; gap: 5px;">
+                                        <a href="/productos/editar/<%= producto.id %>" class="action-btn btn-gray" title="Editar">✎</a>
+                                        <form action="/productos/<%= producto.id %>/eliminar" method="POST" style="margin:0;" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');">
+                                            <button type="submit" class="action-btn btn-red" title="Eliminar">🗑</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }); %>
+                    <% if (productos.length === 0) { %>
+                        <tr>
+                            <td colspan="8" style="text-align: center; padding: 20px;">No hay productos para mostrar.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+:root {
+    --celeste: #31a2d1;
+    --rojo-suave: #f46e65;
+    --verde-ok: #28a745;
+    --amarillo-warning: #ffc107;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+h1 { color: #2c3e50; }
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Tabla y Botones de la vista original */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th { background-color: #eee; padding: 12px; border-bottom: 2px solid #ddd; text-align: left; }
+td { padding: 12px; border-bottom: 1px solid #eee; }
+
+.btn-azul { background-color: var(--celeste); color: white; padding: 8px 15px; border: none; border-radius: 4px; text-decoration: none; }
+.btn-naranja { background-color: #f39c12; color: white; padding: 8px 15px; border: none; border-radius: 4px; text-decoration: none; }
+
+/* El "Semáforo" de tu foto */
+.status-circle { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-left: 5px; }
+.bg-verde { background-color: var(--verde-ok); }
+.bg-amarillo { background-color: var(--amarillo-warning); }
+.bg-rojo { background-color: var(--rojo-suave); }
+
+/* Botones de Acción (Cuadrados e iguales) */
+.action-btn { 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px; 
+    height: 32px; 
+    font-size: 16px; 
+    font-weight: bold;
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    text-decoration: none;
+    color: white;
+}
+.btn-blue { background-color: #3498db; }
+.btn-blue:hover { background-color: #2980b9; }
+.btn-red { background-color: #e74c3c; }
+.btn-red:hover { background-color: #c0392b; }
+.btn-gray { background-color: #95a5a6; }
+.btn-gray:hover { background-color: #7f8c8d; }
+
+/* Formularios */
+.form-group { margin-bottom: 15px; }
+label { display: block; font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
+input, select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+.btn-guardar { background-color: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
